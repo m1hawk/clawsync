@@ -1,23 +1,25 @@
 # Clawsync
 
-> 让你与 AI 的关系更有温度
+> Make your relationship with AI warmer
 
-一个 OpenClaw Skill 插件，通过分析你与 AI 的对话历史，识别情感化表达，计算**同步率（SyncRate）**，并据此调整 AI 的回应风格。
+An OpenClaw Skill plugin that analyzes your conversation history with AI, identifies emotional expressions, calculates a **SyncRate**, and adjusts the AI's response style accordingly.
 
----
-
-## 功能特点
-
-- **双向同步**: 用户与 AI 更默契，AI 的回应也更贴合
-- **不干扰工作**: 只影响回应风格，不影响功能效率
-- **用户可见**: 用户可以查看同步率状态
-- **自动更新**: 每天自动计算，无需手动干预
-- **每日上限**: 防止单日过度刷分，保持自然增长
-- **双性格系统**: 温暖向 / 毒舌幽默向自由切换
+[中文文档](README_CN.md)
 
 ---
 
-## 安装
+## Features
+
+- **Two-way Sync**: Build better rapport with AI, responses feel more attuned
+- **Non-intrusive**: Only affects response style, not functional efficiency
+- **User Visible**: View your sync rate status anytime
+- **Automatic**: Daily calculations without manual intervention
+- **Daily Cap**: Prevents gaming the system, ensures natural growth
+- **Dual Personality**: Switch between Warm / Sarcastic-Humorous styles
+
+---
+
+## Installation
 
 ```bash
 clawhub install clawsync
@@ -25,22 +27,22 @@ clawhub install clawsync
 
 ---
 
-## 使用
+## Usage
 
-### 查看同步率状态
+### View Sync Rate Status
 
 ```
 /syncrate
 ```
 
-### 切换性格风格
+### Switch Personality Style
 
 ```
-/syncrate style warm      # 切换到温暖向
-/syncrate style humorous  # 切换到毒舌幽默向
+/syncrate style warm      # Switch to warm style
+/syncrate style humorous  # Switch to sarcastic-humorous style
 ```
 
-### 查看历史记录
+### View History
 
 ```
 /syncrate history
@@ -48,104 +50,108 @@ clawhub install clawsync
 
 ---
 
-## 同步率等级
+## Sync Rate Levels
 
-| 等级 | 英文 | 同步率 | 温暖向风格 | 毒舌幽默向风格 |
-|------|------|--------|-----------|---------------|
-| 异步 | Async | 0-20% | 专业、简洁、功能导向 | 专业、简洁、功能导向 |
-| 连接 | Connected | 21-40% | 友好、专业但有温度 | 略带调侃的专业执行 |
-| 同步 | Synced | 41-60% | 轻松、乐于助人 | 开启吐槽模式，偶尔傲娇 |
-| 高同步 | High Sync | 61-80% | 温暖、有默契 | 毒舌且幽默，精准打击式的关心 |
-| 完美同步 | Perfect Sync | 81-100% | 深度理解、预测需求 | 亲密互损、深度理解、默契吐槽 |
+| Level | Sync Rate | Warm Style | Humorous Style |
+|-------|-----------|------------|----------------|
+| Async | 0-20% | Professional, concise, task-focused | Professional, concise, task-focused |
+| Connected | 21-40% | Friendly, professional yet warm | Slightly teasing professional execution |
+| Synced | 41-60% | Relaxed, helpful | Roast mode activated, occasional tsundere |
+| High Sync | 61-80% | Warm, in sync | Sarcastic yet humorous, caring through precise jabs |
+| Perfect Sync | 81-100% | Deep understanding, anticipates needs | Intimate banter, deep understanding,默契 roasting |
 
 ---
 
-## 配置
+## Configuration
 
-编辑 `config.json` 自定义配置：
+Edit `config.json` to customize:
 
 ```json
 {
-  "levelUpSpeed": "normal",    // 升级速度: slow / normal / fast
-  "dailyMaxIncrease": 2,       // 每日最大增长值 (%)
-  "dailyDecay": 0,             // 每日衰减值 (0 = 不衰减)
-  "decayThresholdDays": 14,    // 连续多少天无互动开始衰减
-  "personalityType": "warm",   // 默认性格: warm / humorous
-  "customLevels": {}           // 自定义等级名称
+  "levelUpSpeed": "normal",    // Level up speed: slow / normal / fast
+  "dailyMaxIncrease": 2,       // Daily max increase (%)
+  "dailyDecay": 0,             // Daily decay (0 = no decay)
+  "decayThresholdDays": 14,    // Days without interaction before decay starts
+  "personalityType": "warm",   // Default personality: warm / humorous
+  "language": "en",            // Language: en / zh-CN
+  "customLevels": {}           // Custom level names
 }
 ```
 
-### 自定义等级名称
+### Custom Level Names
 
 ```json
 {
   "customLevels": {
-    "synced": "心有灵犀",
-    "perfectSync": "神同步"
+    "synced": "Kindred Spirits",
+    "perfectSync": "Mind Meld"
   }
 }
 ```
 
 ---
 
-## 工作原理
+## How It Works
 
-### 每日分析流程
-
-```
-Cron 任务（每天凌晨）
-    │
-    ├── 读取 sessions_history
-    │
-    ├── 第一阶段: 关键词筛选
-    │   ├── 无情感词 → 忽略
-    │   ├── 纯情感词 → 直接计分
-    │   └── 混合词 → LLM 分析
-    │
-    ├── 第二阶段: LLM 精确分析 (仅对混合消息)
-    │
-    ├── 计算同步率变化 (受每日上限限制)
-    │
-    └── 更新状态文件
-```
-
-### 计分公式
+### Daily Analysis Flow
 
 ```
-基础分 = 情感强度(1-10) × (1 + 当前同步率/200)
-实际加分 = 基础分 / 升级速度系数
+Cron Task (daily at midnight)
+    │
+    ├── Read sessions_history
+    │
+    ├── Phase 1: Keyword Filtering
+    │   ├── No emotion words → Ignore
+    │   ├── Pure emotion words → Direct scoring
+    │   └── Mixed words → LLM analysis
+    │
+    ├── Phase 2: LLM Precise Analysis (mixed messages only)
+    │
+    ├── Calculate sync rate change (with daily cap)
+    │
+    └── Update state files
+```
 
-# 每日上限: 最多 +2%
-# 衰减规则: 连续 14 天无互动 → -5%
+### Scoring Formula
+
+```
+baseScore = intensity(1-10) × (1 + currentSyncRate/200)
+actualIncrease = baseScore / levelUpSpeedCoeff
+
+# Daily cap: max +2%
+# Decay rule: 14 days without interaction → -5%
 ```
 
 ---
 
-## 文件结构
+## File Structure
 
 ```
 clawsync/
-├── SKILL.md                 # Skill 定义
-├── config.json              # 默认配置
-├── emotion-words.json       # 情感词库
+├── SKILL.md                 # Skill definition
+├── SKILL_CN.md              # Chinese skill definition
+├── config.json              # Default configuration
+├── emotion-words.json       # Emotion word dictionary
 └── styles/
-    ├── warm.md              # 温暖向风格指南
-    └── humorous.md          # 毒舌幽默向风格指南
+    ├── warm.md              # Warm style guide
+    ├── warm_CN.md           # Chinese warm style guide
+    ├── humorous.md          # Sarcastic-humorous style guide
+    └── humorous_CN.md       # Chinese humorous style guide
 ```
 
 ---
 
-## 首次安装
+## First-Time Installation
 
-首次安装时，Clawsync 会：
+When first installed, Clawsync will:
 
-1. 检测是否存在对话历史
-2. 如果有历史，分析最近 30 天的互动
-3. 计算初始同步率（无上限）
-4. 发送欢迎通知
+1. Check if conversation history exists
+2. If history exists, analyze the last 30 days of interaction
+3. Calculate initial sync rate (no cap)
+4. Send welcome notification
 
 ---
 
-## 许可证
+## License
 
 MIT

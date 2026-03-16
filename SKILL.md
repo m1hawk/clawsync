@@ -10,259 +10,259 @@ metadata:
       - syncrate
 ---
 
-# Clawsync 同步率追踪器
+# Clawsync Sync Rate Tracker
 
-> 让你与 AI 的关系更有温度
+> Make your relationship with AI warmer
 
-## 概述
+## Overview
 
-Clawsync 通过分析你与 AI 的对话历史，识别情感化表达，计算**同步率（SyncRate）**，并据此调整 AI 的回应风格。
-
----
-
-## 响应风格指南
-
-在每次回复前，请读取 `{baseDir}/../SYNCRATE.md` 文件，了解当前同步率等级和风格配置。
-
-根据同步率等级和当前性格风格调整你的回应风格。
-
-### 同步率等级
-
-| 等级 | 英文 | 同步率范围 |
-|------|------|-----------|
-| 异步 | Async | 0-20% |
-| 连接 | Connected | 21-40% |
-| 同步 | Synced | 41-60% |
-| 高同步 | High Sync | 61-80% |
-| 完美同步 | Perfect Sync | 81-100% |
-
-### 性格风格
-
-系统支持两种性格风格，用户可通过命令切换：
-
-- **温暖向 (warm)**: 友好、专业但有温度，轻松乐于助人
-- **毒舌幽默向 (humorous)**: 略带调侃的专业执行，开启吐槽模式
-
-详细的风格指南请读取：
-- 温暖向: `{skillDir}/styles/warm.md`
-- 毒舌幽默向: `{skillDir}/styles/humorous.md`
+Clawsync analyzes your conversation history with AI, identifies emotional expressions, calculates a **SyncRate**, and adjusts the AI's response style accordingly.
 
 ---
 
-## 用户命令
+## Response Style Guide
+
+Before each response, read `{baseDir}/../SYNCRATE.md` to understand the current sync rate level and style configuration.
+
+Adjust your response style based on the sync rate level and current personality style.
+
+### Sync Rate Levels
+
+| Level | Sync Rate Range |
+|-------|-----------------|
+| Async | 0-20% |
+| Connected | 21-40% |
+| Synced | 41-60% |
+| High Sync | 61-80% |
+| Perfect Sync | 81-100% |
+
+### Personality Styles
+
+The system supports two personality styles that users can switch between via commands:
+
+- **Warm**: Friendly, professional yet warm, relaxed and helpful
+- **Humorous**: Slightly teasing professional execution, roast mode with care
+
+For detailed style guides, read:
+- Warm: `{skillDir}/styles/warm.md`
+- Humorous: `{skillDir}/styles/humorous.md`
+
+---
+
+## User Commands
 
 ### `/syncrate`
 
-显示当前同步率状态。
+Display current sync rate status.
 
-**执行逻辑**:
-1. 读取 `{baseDir}/../SYNCRATE.md` 获取当前状态
-2. 读取 `{dataDir}/state.json` 获取详细状态
-3. 返回格式化的状态信息
+**Execution Logic**:
+1. Read `{baseDir}/../SYNCRATE.md` to get current status
+2. Read `{dataDir}/state.json` to get detailed state
+3. Return formatted status information
 
-**输出格式**:
+**Output Format**:
 ```
-🔗 同步率状态
+🔗 Sync Rate Status
 
-当前同步率: 45%
-等级: 同步 (Synced)
-风格: 温暖向 (warm)
-最后更新: 2026-03-16
+Current Sync Rate: 45%
+Level: Synced
+Style: Warm
+Last Updated: 2026-03-16
 
-继续保持自然的情感交流，我们的默契会越来越好～
+Keep up the natural emotional exchanges, our rapport will only get better~
 ```
 
 ### `/syncrate style <warm|humorous>`
 
-切换性格风格。
+Switch personality style.
 
-**参数**:
-- `warm` - 切换到温暖向风格
-- `humorous` - 切换到毒舌幽默向风格
+**Parameters**:
+- `warm` - Switch to warm style
+- `humorous` - Switch to sarcastic-humorous style
 
-**执行逻辑**:
-1. 验证参数有效性
-2. 更新 `{dataDir}/state.json` 中的 `personalityType`
-3. 重新生成 `{baseDir}/../SYNCRATE.md`
-4. 返回确认信息
+**Execution Logic**:
+1. Validate parameter
+2. Update `personalityType` in `{dataDir}/state.json`
+3. Regenerate `{baseDir}/../SYNCRATE.md`
+4. Return confirmation message
 
-**输出格式**:
+**Output Format**:
 ```
-🔗 风格已切换到温暖向 (warm)
+🔗 Style switched to Warm
 
-下次回复将按新风格进行。
+Next response will use the new style.
 ```
 
 ### `/syncrate history`
 
-显示同步率变化历史（最近 7 天）。
+Display sync rate change history (last 7 days).
 
-**执行逻辑**:
-1. 读取 `{dataDir}/history.jsonl`
-2. 筛选最近 7 天的记录
-3. 返回格式化的历史信息
+**Execution Logic**:
+1. Read `{dataDir}/history.jsonl`
+2. Filter records from last 7 days
+3. Return formatted history information
 
-**输出格式**:
+**Output Format**:
 ```
-🔗 同步率历史 (最近 7 天)
+🔗 Sync Rate History (Last 7 Days)
 
-| 日期 | 同步率 | 变化 | 原因 |
-|------|--------|------|------|
-| 03-16 | 45% | +2% | 情感互动 |
-| 03-15 | 43% | +1% | 情感互动 |
-| 03-14 | 42% | 0% | 无互动 |
-| 03-13 | 42% | +2% | 情感互动 |
+| Date | Sync Rate | Change | Reason |
+|------|-----------|--------|--------|
+| 03-16 | 45% | +2% | Emotional interaction |
+| 03-15 | 43% | +1% | Emotional interaction |
+| 03-14 | 42% | 0% | No interaction |
+| 03-13 | 42% | +2% | Emotional interaction |
 
-本周变化: +5%
+Weekly change: +5%
 ```
 
 ---
 
-## Cron 每日任务
+## Cron Daily Task
 
-每天凌晨执行同步率计算任务。
+Daily sync rate calculation task runs at midnight.
 
-### 执行流程
+### Execution Flow
 
 ```
-1. 读取 sessions_history 获取昨天消息
+1. Read sessions_history for yesterday's messages
         │
         ▼
-2. 第一阶段: 关键词筛选
-   ├── 无情感词 → 忽略
-   ├── 纯情感词 → 直接计分
-   └── 混合词 → 进入第二阶段
+2. Phase 1: Keyword Filtering
+   ├── No emotion words → Ignore
+   ├── Pure emotion words → Direct scoring
+   └── Mixed words → Proceed to Phase 2
         │
         ▼
-3. 第二阶段: LLM 精确分析 (仅对混合消息)
-   分析意图和情感强度 (1-10)
+3. Phase 2: LLM Precise Analysis (mixed messages only)
+   Analyze intent and emotional intensity (1-10)
         │
         ▼
-4. 计算同步率变化
-   - 应用计分公式
-   - 应用每日上限 (+2% max)
-   - 检查等级跨越
+4. Calculate sync rate change
+   - Apply scoring formula
+   - Apply daily cap (+2% max)
+   - Check level transitions
         │
         ▼
-5. 应用衰减规则
-   检查连续无互动天数，超过14天则 -5%
+5. Apply decay rules
+   Check consecutive days without interaction, -5% if over 14 days
         │
         ▼
-6. 更新文件
+6. Update files
    - state.json
    - history.jsonl
    - SYNCRATE.md
         │
         ▼
-7. 发送通知 (如有变化)
-   - 每日摘要
-   - 升级通知
+7. Send notifications (if changes)
+   - Daily summary
+   - Level up notification
 ```
 
-### 情感分析提示词
+### Emotion Analysis Prompt
 
-对于需要 LLM 分析的混合消息，使用以下提示词：
+For mixed messages requiring LLM analysis, use the following prompt:
 
 ```
-分析这条消息的主要意图：
-1. 是情感表达还是任务指令？
-2. 如果是混合的，哪个是主要意图?
-3. 情感强度是多少 (1-10)?
+Analyze the main intent of this message:
+1. Is it emotional expression or a task directive?
+2. If mixed, which is the primary intent?
+3. What's the emotional intensity (1-10)?
 
-消息: {message}
+Message: {message}
 
-返回 JSON 格式:
-{ "intent": "emotional" | "task" | "mixed", "intensity": 1-10, "reasoning": "简短说明" }
+Return JSON format:
+{ "intent": "emotional" | "task" | "mixed", "intensity": 1-10, "reasoning": "Brief explanation" }
 ```
 
 ---
 
-## 首次安装流程
+## First-Time Installation Flow
 
-当检测到 `{dataDir}/state.json` 不存在时，执行首次安装流程。
+When `{dataDir}/state.json` doesn't exist, execute first-time installation flow.
 
-### 执行流程
+### Execution Flow
 
 ```
-1. 检测 state.json 是否存在
+1. Check if state.json exists
         │
-        ├── 不存在 → 首次安装
+        ├── Not exists → First-time installation
         │       │
         │       ▼
-        │   检测 sessions_history
+        │   Check sessions_history
         │       │
-        │       ├── 无历史 → 初始同步率 0%
+        │       ├── No history → Initial sync rate 0%
         │       │
-        │       └── 有历史
+        │       └── Has history
         │               │
         │               ▼
-        │           读取最近 30 天记录
+        │           Read last 30 days records
         │               │
         │               ▼
-        │           批量情感分析
+        │           Batch emotion analysis
         │               │
         │               ▼
-        │           计算初始同步率 (无上限)
+        │           Calculate initial sync rate (no cap)
         │
         ▼
-2. 生成初始文件
+2. Generate initial files
    - state.json
-   - history.jsonl (空)
+   - history.jsonl (empty)
    - SYNCRATE.md
         │
         ▼
-3. 发送欢迎通知
+3. Send welcome notification
 ```
 
-### 欢迎通知
+### Welcome Notification
 
-**新用户 (无历史)**:
+**New User (No History)**:
 ```
-🔗 欢迎使用 Clawsync！
+🔗 Welcome to Clawsync!
 
-让我们开始建立默契吧～
-每次自然的情感交流都会提升我们的同步率。
+Let's start building our rapport~
+Every natural emotional exchange will boost our sync rate.
 
-发送 /syncrate 随时查看状态
+Send /syncrate anytime to check your status
 ```
 
-**有历史的用户**:
+**User with History**:
 ```
-🔗 欢迎使用 Clawsync！
+🔗 Welcome to Clawsync!
 
-分析了我们过去 30 天的互动：
-- 初始同步率: 45% (同步)
-- 情感互动天数: 18 天
-- 默认风格: 温暖向 (warm)
+Analyzed our past 30 days of interaction:
+- Initial Sync Rate: 45% (Synced)
+- Emotional Interaction Days: 18 days
+- Default Style: Warm
 
-发送 /syncrate style warm 切换到温暖向
-发送 /syncrate style humorous 切换到毒舌幽默向
-发送 /syncrate 随时查看状态
+Send /syncrate style warm to switch to warm style
+Send /syncrate style humorous to switch to sarcastic-humorous style
+Send /syncrate anytime to check your status
 ```
 
 ---
 
-## 文件路径说明
+## File Path Reference
 
-| 路径变量 | 说明 | 示例 |
-|---------|------|------|
-| `{skillDir}` | Skill 安装目录 | `~/.openclaw/workspace/skills/clawsync` |
-| `{baseDir}` | 工作空间目录 | `~/.openclaw/workspace` |
-| `{dataDir}` | 数据存储目录 | `~/.openclaw/syncrate` |
-
----
-
-## 配置文件
-
-配置文件位于 `{skillDir}/config.json`，详见该文件。
-
-情感词库位于 `{skillDir}/emotion-words.json`。
+| Path Variable | Description | Example |
+|--------------|-------------|---------|
+| `{skillDir}` | Skill installation directory | `~/.openclaw/workspace/skills/clawsync` |
+| `{baseDir}` | Workspace directory | `~/.openclaw/workspace` |
+| `{dataDir}` | Data storage directory | `~/.openclaw/syncrate` |
 
 ---
 
-## 注意事项
+## Configuration File
 
-1. **不要主动提及同步率机制** - 自然地根据同步率调整风格
-2. **只影响回应风格** - 不影响功能效率和工作能力
-3. **情感分析仅在 Cron 任务中进行** - 不在实时对话中分析
-4. **保护用户隐私** - 情感分析结果仅用于计算同步率，不存储原始消息内容
+Configuration file located at `{skillDir}/config.json`, see that file for details.
+
+Emotion word dictionary located at `{skillDir}/emotion-words.json`.
+
+---
+
+## Important Notes
+
+1. **Don't proactively mention the sync rate mechanism** - Naturally adjust style based on sync rate
+2. **Only affects response style** - Does not affect functional efficiency and work capability
+3. **Emotion analysis only in Cron task** - Not analyzed during real-time conversation
+4. **Protect user privacy** - Emotion analysis results only used for calculating sync rate, original message content not stored
