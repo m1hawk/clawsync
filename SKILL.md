@@ -1,7 +1,7 @@
 ---
 name: soulsync
-version: "1.0.0"
-description: Track your sync rate with AI assistant
+version: "1.0.1"
+description: Check your soul syncrate with your clawbot
 metadata: { "openclaw": { "emoji": "🔗", "always": true, "user-invocable": true } }
 ---
 

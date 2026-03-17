@@ -1,7 +1,7 @@
 ---
 name: soulsync
-version: "1.0.0"
-description: 让你与 AI 的关系更有温度
+version: "1.0.1"
+description: 查看你跟龙虾的灵魂同步率
 metadata: { "openclaw": { "emoji": "🔗", "always": true, "user-invocable": true } }
 ---
 
