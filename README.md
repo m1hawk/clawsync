@@ -1,4 +1,4 @@
-# Clawsync
+# Soulsync
 
 > Make your relationship with AI warmer
 
@@ -22,7 +22,7 @@ An OpenClaw Skill plugin that analyzes your conversation history with AI, identi
 ## Installation
 
 ```bash
-clawhub install clawsync
+clawhub install soulsync
 ```
 
 ---
@@ -127,7 +127,7 @@ actualIncrease = baseScore / levelUpSpeedCoeff
 ## File Structure
 
 ```
-clawsync/
+soulsync/
 ├── SKILL.md                 # Skill definition
 ├── SKILL_CN.md              # Chinese skill definition
 ├── config.json              # Default configuration
@@ -143,7 +143,7 @@ clawsync/
 
 ## First-Time Installation
 
-When first installed, Clawsync will:
+When first installed, Soulsync will:
 
 1. Check if conversation history exists
 2. If history exists, analyze the last 30 days of interaction

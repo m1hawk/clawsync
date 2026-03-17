@@ -1,4 +1,4 @@
-# Clawsync
+# Soulsync
 
 > 让你与 AI 的关系更有温度
 
@@ -22,7 +22,7 @@
 ## 安装
 
 ```bash
-clawhub install clawsync
+clawhub install soulsync
 ```
 
 ---
@@ -143,7 +143,7 @@ clawsync/
 
 ## 首次安装
 
-首次安装时，Clawsync 会：
+首次安装时，Soulsync 会：
 
 1. 检测是否存在对话历史
 2. 如果有历史，分析最近 30 天的互动
