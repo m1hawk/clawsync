@@ -1,16 +1,17 @@
 ---
-name: clawsync
+name: soulsync
+version: "1.0.0"
 description: 让你与 AI 的关系更有温度
 metadata: { "openclaw": { "emoji": "🔗", "always": true, "user-invocable": true } }
 ---
 
-# Clawsync 同步率追踪器
+# Soulsync 同步率追踪器
 
 > 让你与 AI 的关系更有温度
 
 ## 概述
 
-Clawsync 通过分析你与 AI 的对话历史，识别情感化表达，计算**同步率（SyncRate）**，并据此调整 AI 的回应风格。
+Soulsync 通过分析你与 AI 的对话历史，识别情感化表达，计算**同步率（SyncRate）**，并据此调整 AI 的回应风格。
 
 ---
 

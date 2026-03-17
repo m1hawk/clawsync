@@ -1,16 +1,17 @@
 ---
-name: clawsync
+name: soulsync
+version: "1.0.0"
 description: Track your sync rate with AI assistant
 metadata: { "openclaw": { "emoji": "🔗", "always": true, "user-invocable": true } }
 ---
 
-# Clawsync Sync Rate Tracker
+# Soulsync Sync Rate Tracker
 
 > Make your relationship with AI warmer
 
 ## Overview
 
-Clawsync analyzes your conversation history with AI, identifies emotional expressions, calculates a **SyncRate**, and adjusts the AI's response style accordingly.
+Soulsync analyzes your conversation history with AI, identifies emotional expressions, calculates a **SyncRate**, and adjusts the AI's response style accordingly.
 
 ---
 
