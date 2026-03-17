@@ -1,13 +1,7 @@
 ---
 name: clawsync
 description: Track your sync rate with AI assistant
-metadata:
-  openclaw:
-    emoji: "🔗"
-    always: true
-    user-invocable: true
-    commands:
-      - syncrate
+metadata: { "openclaw": { "emoji": "🔗", "always": true, "user-invocable": true } }
 ---
 
 # Clawsync Sync Rate Tracker
