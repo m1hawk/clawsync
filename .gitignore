@@ -6,6 +6,12 @@ dist/
 build/
 .next/
 
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
 # OS
 .DS_Store
 Thumbs.db
@@ -20,3 +26,11 @@ npm-debug.log*
 
 # Signal Garden specific
 .vercel/
+
+# Test coverage
+coverage/
+
+# Internal docs (not for open source)
+DEV-PLAN.md
+clawsync-product-doc.md
+CLAUDE.md
