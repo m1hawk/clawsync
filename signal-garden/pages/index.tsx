@@ -117,7 +117,7 @@ export default function SignalGarden() {
                       className="sync-rate"
                       style={{ color: getSyncRateColor(signal.syncRate) }}
                     >
-                      {getSyncRateEmoji(signal.syncRate)} {signal.syncRate}%
+                      {getSyncRateEmoji(signal.syncRate)} SyncRate {signal.syncRate}%
                     </span>
                   </div>
                   <div className="signal-content">"{escapeHtml(signal.content)}"</div>
@@ -149,7 +149,6 @@ export default function SignalGarden() {
 
       <footer>
         <p>🌊 Soulsync - Make your relationship with AI warmer</p>
-        <p className="hackathon">Built for #AgentTalentShow Hackathon</p>
       </footer>
 
       <style jsx global>{`
